@@ -114,3 +114,43 @@ class Car {
     private String name;
     private List<Integer> ids;
 }
+
+@Controller
+class PersonController {
+    int lastId;
+    List<Person> people;
+
+    PersonController() {
+        lastId = 0;
+        people = new ArrayList<>();
+    }
+
+    @GetMapping("/home/add")
+    @ResponseBody
+    public String addPerson(@RequestParam("name") String name,
+                            @RequestParam("age") int age) {
+        lastId++;
+
+        Person person = new Person(lastId, age, name);
+        people.add(person);
+
+        return String.format("%d번째 사람이 추가되었습니다.", person.getId());
+    }
+
+    @GetMapping("/person/people")
+    @ResponseBody
+    public List<Person> getPeople() {
+        System.out.println(people);
+        return people;
+    }
+}
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+class Person {
+    private int id;
+    private int age;
+    private String name;
+}
