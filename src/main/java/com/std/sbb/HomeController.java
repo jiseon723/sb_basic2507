@@ -14,4 +14,27 @@ public class HomeController {
     public String ShowMain() {
         return "안녕하세요";
     }
+
+    @GetMapping("/home/main2")
+    @ResponseBody // 있는 그대로 반환하겠다.
+    public String ShowMain2() {
+        return "반갑습니다.";
+    }
+
+    @GetMapping("/home/main3")
+    @ResponseBody // 있는 그대로 반환하겠다.
+    public String ShowMain3() {
+        return "즐거웠습니다.";
+    }
+
+    private int i;
+    HomeController () {
+        int i = -1;
+    }
+    @GetMapping("/home/increase")
+    @ResponseBody
+    public int ShowIncrease() {
+        i++;
+        return i;
+    }
 }
