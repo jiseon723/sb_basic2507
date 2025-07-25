@@ -56,6 +56,26 @@ public class CarController {
         }
         return "삭제되었습니다.";
     }
+
+    @GetMapping("/mycar/modify")
+    @ResponseBody
+    public String CarModify (@RequestParam("id") int id, @RequestParam("speed") int speed, @RequestParam("name") String name, @RequestParam("color") String color) {
+        MyCar foundCar = null;
+
+        for (MyCar myCar : myCars) {
+            if (id == myCar.getId()) {
+                foundCar = myCar;
+            }
+        }
+        if (foundCar == null) {
+            return "없는 차입니다.";
+        }
+        foundCar.setSpeed(speed);
+        foundCar.setName(name);
+        foundCar.setColor(color);
+
+        return "수정되었습니다.";
+    }
 }
 
 @AllArgsConstructor
